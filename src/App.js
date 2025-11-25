@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 export default function DesignAlchemyLab() {
