@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 export default function DesignAlchemyLab() {
@@ -77,8 +77,6 @@ export default function DesignAlchemyLab() {
     }
   };
 
-  // (Removed unused bubbles/particles state and effect to avoid unused variable lint errors)
-
   const getActiveGlowingTubes = () => {
     if (currentFlask < mixSequence.length) {
       return mixSequence[currentFlask].tubes;
@@ -97,13 +95,11 @@ export default function DesignAlchemyLab() {
   const handleTubeClick = (tubeId) => {
     if (isDisabled(tubeId) || pouring.length > 0) return;
 
-    // Check if tube is already selected - if so, deselect it
     if (selectedTubes.includes(tubeId)) {
       setSelectedTubes(selectedTubes.filter(id => id !== tubeId));
       return;
     }
 
-    // Don't allow more than 2 selections
     if (selectedTubes.length >= 2) return;
 
     const newSelected = [...selectedTubes, tubeId];
@@ -117,8 +113,6 @@ export default function DesignAlchemyLab() {
         const result = mixResults[mixKey];
 
         if (!result) {
-          // Gracefully handle unknown mixes: reset selection & pouring
-          // You can improve UX here (show a message) if desired
           console.warn(`No mix result for key: ${mixKey}`);
           setSelectedTubes([]);
           setPouring([]);
@@ -155,7 +149,6 @@ export default function DesignAlchemyLab() {
 
   return (
     <div className="min-h-screen p-4 sm:p-8 overflow-hidden relative bg-white">
-      {/* Background images on both sides */}
       <div
         className="hidden md:block fixed inset-0 w-full h-full pointer-events-none z-0"
         style={{
@@ -164,7 +157,7 @@ export default function DesignAlchemyLab() {
           backgroundPosition: 'left -20% center',
           backgroundSize: '30%'
         }}
-      ></div>
+      />
       <div
         className="hidden md:block fixed inset-0 w-full h-full pointer-events-none z-0"
         style={{
@@ -173,7 +166,7 @@ export default function DesignAlchemyLab() {
           backgroundPosition: 'right -20% center',
           backgroundSize: '30%'
         }}
-      ></div>
+      />
 
       <style>
         {`
@@ -283,17 +276,15 @@ export default function DesignAlchemyLab() {
           }
         `}
       </style>
+
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Title */}
         <div className="text-center mb-2">
           <h1 className="ancient-title text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-black typewriter inline-block">
             Welcome to Design Alchemy!
           </h1>
         </div>
 
-        {/* Content within border */}
         <div className="px-2 sm:px-4 md:px-12 sm:pt-8 pb-4 sm:pb-8">
-          {/* Chemical Flasks Section */}
           <div className="mb-8 mt-0">
             <div className="flex items-center justify-center mb-4">
               <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-black animate-bounce" />
@@ -304,23 +295,18 @@ export default function DesignAlchemyLab() {
             <div className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-16 md:gap-32 items-center">
               {flasks.map((flask, index) => (
                 <div key={index} className="relative w-full sm:w-auto flex justify-center">
-                  {/* Ultra-Realistic Vintage Potion Bottle */}
                   <div className={`relative transition-all duration-500 ${
                     index === currentFlask && pouring.length === 0 ? 'scale-110' : 'scale-100'
                   }`}>
                     <div className="relative w-40 h-48 sm:w-48 sm:h-60 md:w-56 md:h-72 flex items-center justify-center overflow-hidden bottle-container">
-                      {/* Imgur Potion Bottle Image */}
                       <div className="relative bg-transparent">
                         <img
                           src="https://i.imgur.com/P0bO9B0.png"
                           alt="Potion Bottle"
                           className="w-full h-full object-contain"
-                          style={{
-                            backgroundColor: 'transparent'
-                          }}
+                          style={{ backgroundColor: 'transparent' }}
                         />
 
-                        {/* Liquid overlay for filled state */}
                         {flask.filled && (
                           <div
                             className="absolute inset-0 w-full h-full opacity-60 mix-blend-overlay animate-pulse"
@@ -334,10 +320,8 @@ export default function DesignAlchemyLab() {
                           />
                         )}
 
-                        {/* Active glow indicator with fireflies */}
                         {index === currentFlask && !flask.filled && pouring.length === 0 && (
                           <div className="absolute inset-0">
-                            {/* Fireflies around the bottle - more centralized and closer together */}
                             <div className="absolute top-16 left-6 w-4 h-4 bg-yellow-400 rounded-full animate-pulse border-4 border-white shadow-lg" style={{boxShadow: '0 0 40px #ffff00, 0 0 80px #ffff00, 0 0 120px #ffd700, inset 0 0 20px #ffffff'}}></div>
                             <div className="absolute top-20 right-6 w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce animation-delay-200 border-4 border-white shadow-lg" style={{boxShadow: '0 0 35px #ffff00, 0 0 70px #ffff00, 0 0 105px #ffd700, inset 0 0 15px #ffffff'}}></div>
                             <div className="absolute top-24 left-8 w-3 h-3 bg-yellow-400 rounded-full animate-pulse animation-delay-500 border-3 border-white shadow-lg" style={{boxShadow: '0 0 30px #ffff00, 0 0 60px #ffff00, 0 0 90px #ffd700, inset 0 0 12px #ffffff'}}></div>
@@ -349,7 +333,6 @@ export default function DesignAlchemyLab() {
                           </div>
                         )}
 
-                        {/* Pouring sparkles */}
                         {pouring.length > 0 && index === currentFlask && (
                           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-6xl animate-bounce"></div>
                         )}
@@ -357,7 +340,6 @@ export default function DesignAlchemyLab() {
                     </div>
                   </div>
 
-                  {/* Text bubble */}
                   {flask.filled && flask.text && (
                     <div className={`absolute left-1/2 -translate-x-1/2 w-64 sm:w-72 md:w-80 p-3 sm:p-4 bg-white rounded-2xl shadow-xl border-2 border-gray-300 animate-in fade-in slide-in-from-top duration-700 delay-500 ${
                       index === 0 ? '-bottom-20' : '-bottom-24'
@@ -371,7 +353,6 @@ export default function DesignAlchemyLab() {
             </div>
           </div>
 
-          {/* Test Tubes Section */}
           <div className="mt-4 pt-4">
             <div className="flex items-center justify-center mb-4">
               {currentFlask === 0 && <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-black animate-bounce" />}
@@ -388,7 +369,6 @@ export default function DesignAlchemyLab() {
 
                 return (
                   <div key={tube.id} className="flex flex-col items-center">
-                    {/* Medieval Test tube SVG */}
                     <button
                       onClick={() => handleTubeClick(tube.id)}
                       disabled={disabled || pouring.length > 0}
@@ -400,7 +380,6 @@ export default function DesignAlchemyLab() {
                         isPouringThis ? '-rotate-45 -translate-y-8' : 'rotate-0'
                       }`}
                     >
-                      {/* Test Tube Image */}
                       <div className="relative">
                         <img
                           src="https://i.imgur.com/wglGmb7.png"
@@ -412,7 +391,6 @@ export default function DesignAlchemyLab() {
                           }}
                         />
 
-                        {/* Luminescent, glowing, iridescent liquid overlay */}
                         <div
                           className="absolute inset-0 w-full h-full"
                           style={{
@@ -427,12 +405,11 @@ export default function DesignAlchemyLab() {
                             maskPosition: 'center',
                             opacity: 0.35,
                             filter: 'brightness(1.1) contrast(1.1) saturate(1.2)',
-                            boxShadow: `inset 0 0 10px ${tube.glowColor}20, 0 0 15px ${tube.glowColor}15`,
+                            boxShadow: \`inset 0 0 10px ${tube.glowColor}20, 0 0 15px ${tube.glowColor}15\`,
                             animation: 'liquid-shimmer 3s ease-in-out infinite'
                           }}
                         />
 
-                        {/* Iridescent shimmer effect */}
                         <div
                           className="absolute inset-0 w-full h-full"
                           style={{
@@ -451,24 +428,21 @@ export default function DesignAlchemyLab() {
                           }}
                         />
 
-                        {/* Glow effect when active */}
                         {glowing && !disabled && (
                           <div
                             className="absolute inset-0 animate-pulse"
                             style={{
-                              boxShadow: `0 0 20px ${tube.glowColor}, 0 0 40px ${tube.glowColor}`,
+                              boxShadow: \`0 0 20px ${tube.glowColor}, 0 0 40px ${tube.glowColor}\`,
                               borderRadius: '10px'
                             }}
                           />
                         )}
 
-                        {/* Pouring effect */}
                         {isPouringThis && (
                           <div className="absolute top-0 left-1/2 -translate-x-1/2 text-4xl animate-bounce"></div>
                         )}
                       </div>
 
-                      {/* Selected indicator */}
                       {selected && (
                         <div className="absolute -top-2 -right-2 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center text-black font-bold shadow-lg">
                           ✓
@@ -476,7 +450,6 @@ export default function DesignAlchemyLab() {
                       )}
                     </button>
 
-                    {/* Label */}
                     <div className="mt-2 sm:mt-3 text-center max-w-[80px] sm:max-w-[100px]">
                       <p className={`text-sm sm:text-base md:text-lg font-black text-black transition-all duration-300 medieval-text ${
                         glowing ? 'scale-110 text-amber-600' : ''
@@ -490,7 +463,6 @@ export default function DesignAlchemyLab() {
             </div>
           </div>
 
-          {/* Instructions */}
           <div className="mt-4 text-center px-2">
             <p className="text-sm sm:text-base md:text-xl font-bold text-black bg-gray-100/80 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full inline-block shadow-lg border-2 border-gray-400 medieval-text">
               {getCurrentInstructions()}
