@@ -405,7 +405,7 @@ export default function DesignAlchemyLab() {
                             maskPosition: 'center',
                             opacity: 0.35,
                             filter: 'brightness(1.1) contrast(1.1) saturate(1.2)',
-                            boxShadow: \`inset 0 0 10px ${tube.glowColor}20, 0 0 15px ${tube.glowColor}15\`,
+                            boxShadow: \`inset 0 0 10px ${tube.glowColor}20, 0 0 15px ${tube.glowColor}15`,
                             animation: 'liquid-shimmer 3s ease-in-out infinite'
                           }}
                         />
