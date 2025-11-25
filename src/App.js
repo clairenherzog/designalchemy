@@ -154,8 +154,8 @@ export default function DesignAlchemyLab() {
         style={{
           backgroundImage: 'url(https://i.imgur.com/i1cF3LP.png)',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'left -20% center',
-          backgroundSize: '30%'
+          backgroundPosition: 'left center',
+          backgroundSize: 'auto 100%'
         }}
       />
       <div
@@ -163,8 +163,8 @@ export default function DesignAlchemyLab() {
         style={{
           backgroundImage: 'url(https://i.imgur.com/h6nIP8S.png)',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right -20% center',
-          backgroundSize: '30%'
+          backgroundPosition: 'right center',
+          backgroundSize: 'auto 100%'
         }}
       />
 
