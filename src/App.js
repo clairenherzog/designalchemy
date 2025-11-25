@@ -167,10 +167,10 @@ export default function DesignAlchemyLab() {
   };
 
   return (
-    <div className="min-h-screen p-8 overflow-hidden relative bg-white">
+    <div className="min-h-screen p-4 sm:p-8 overflow-hidden relative bg-white">
       {/* Background images on both sides */}
       <div 
-        className="fixed inset-0 w-full h-full pointer-events-none z-0"
+        className="hidden md:block fixed inset-0 w-full h-full pointer-events-none z-0"
         style={{
           backgroundImage: 'url(https://i.imgur.com/i1cF3LP.png)',
           backgroundRepeat: 'no-repeat',
@@ -179,7 +179,7 @@ export default function DesignAlchemyLab() {
         }}
       ></div>
       <div 
-        className="fixed inset-0 w-full h-full pointer-events-none z-0"
+        className="hidden md:block fixed inset-0 w-full h-full pointer-events-none z-0"
         style={{
           backgroundImage: 'url(https://i.imgur.com/h6nIP8S.png)',
           backgroundRepeat: 'no-repeat',
@@ -299,29 +299,29 @@ export default function DesignAlchemyLab() {
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Title */}
         <div className="text-center mb-2">
-          <h1 className="ancient-title text-7xl text-black typewriter inline-block">
+          <h1 className="ancient-title text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-black typewriter inline-block">
             Welcome to Design Alchemy!
           </h1>
         </div>
 
         {/* Content within border */}
-        <div className="px-12 pt-8 pb-8">
+        <div className="px-2 sm:px-4 md:px-12 sm:pt-8 pb-4 sm:pb-8">
           {/* Chemical Flasks Section */}
           <div className="mb-8 mt-0">
             <div className="flex items-center justify-center mb-4">
-              <ArrowDown className="w-6 h-6 text-black animate-bounce" />
-              <span className="ml-2 text-3xl font-bold text-black medieval-text">Potions</span>
+              <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-black animate-bounce" />
+              <span className="ml-2 text-xl sm:text-2xl md:text-3xl font-bold text-black medieval-text">Potions</span>
               <ArrowDown className="w-6 h-6 text-black animate-bounce ml-2" />
             </div>
             
-            <div className="flex justify-center gap-32">
+            <div className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-16 md:gap-32 items-center">
               {flasks.map((flask, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative w-full sm:w-auto flex justify-center">
                   {/* Ultra-Realistic Vintage Potion Bottle */}
                   <div className={`relative transition-all duration-500 ${
                     index === currentFlask && pouring.length === 0 ? 'scale-110' : 'scale-100'
                   }`}>
-                    <div className="relative w-56 h-72 flex items-center justify-center overflow-hidden bottle-container">
+                    <div className="relative w-40 h-48 sm:w-48 sm:h-60 md:w-56 md:h-72 flex items-center justify-center overflow-hidden bottle-container">
                       {/* Imgur Potion Bottle Image */}
                       <div className="relative bg-transparent">
                         <img 
@@ -372,7 +372,7 @@ export default function DesignAlchemyLab() {
 
                 {/* Text bubble */}
                 {flask.filled && flask.text && (
-                  <div className={`absolute left-1/2 -translate-x-1/2 w-80 p-4 bg-white rounded-2xl shadow-xl border-2 border-gray-300 animate-in fade-in slide-in-from-top duration-700 delay-500 ${
+                  <div className={`absolute left-1/2 -translate-x-1/2 w-64 sm:w-72 md:w-80 p-3 sm:p-4 bg-white rounded-2xl shadow-xl border-2 border-gray-300 animate-in fade-in slide-in-from-top duration-700 delay-500 ${
                     index === 0 ? '-bottom-20' : '-bottom-24'
                   }`}>
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-l-2 border-t-2 border-gray-300 rotate-45"></div>
@@ -387,12 +387,12 @@ export default function DesignAlchemyLab() {
           {/* Test Tubes Section */}
           <div className="mt-4 pt-4">
             <div className="flex items-center justify-center mb-4">
-              {currentFlask === 0 && <ArrowDown className="w-6 h-6 text-black animate-bounce" />}
-              <span className={`text-3xl font-bold text-black medieval-text ${currentFlask === 0 ? 'ml-2' : ''}`}>Core Elements</span>
+              {currentFlask === 0 && <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-black animate-bounce" />}
+              <span className={`text-xl sm:text-2xl md:text-3xl font-bold text-black medieval-text ${currentFlask === 0 ? 'ml-2' : ''}`}>Core Elements</span>
               {currentFlask === 0 && <ArrowDown className="w-6 h-6 text-black animate-bounce ml-2" />}
             </div>
 
-            <div className="flex justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {testTubes.map((tube) => {
                 const glowing = isGlowing(tube.id);
                 const disabled = isDisabled(tube.id);
@@ -418,7 +418,7 @@ export default function DesignAlchemyLab() {
                         <img 
                           src="https://i.imgur.com/wglGmb7.png" 
                           alt="Test Tube"
-                          className="w-20 h-44 object-contain drop-shadow-xl"
+                          className="w-14 h-32 sm:w-16 sm:h-36 md:w-20 md:h-44 object-contain drop-shadow-xl"
                           style={{
                             backgroundColor: 'transparent',
                             filter: glowing ? 'brightness(1.2) saturate(1.3) drop-shadow(0 0 10px rgba(255,255,255,0.8))' : 'brightness(1.0)'
@@ -490,8 +490,8 @@ export default function DesignAlchemyLab() {
                   </button>
 
                     {/* Label */}
-                    <div className="mt-3 text-center max-w-[100px]">
-                      <p className={`text-lg font-black text-black transition-all duration-300 medieval-text ${
+                    <div className="mt-2 sm:mt-3 text-center max-w-[80px] sm:max-w-[100px]">
+                      <p className={`text-sm sm:text-base md:text-lg font-black text-black transition-all duration-300 medieval-text ${
                         glowing ? 'scale-110 text-amber-600' : ''
                       }`}>
                         {tube.name}
@@ -504,12 +504,12 @@ export default function DesignAlchemyLab() {
           </div>
 
           {/* Instructions */}
-          <div className="mt-4 text-center">
-            <p className="text-xl font-bold text-black bg-gray-100/80 backdrop-blur-sm px-6 py-3 rounded-full inline-block shadow-lg border-2 border-gray-400 medieval-text">
+          <div className="mt-4 text-center px-2">
+            <p className="text-sm sm:text-base md:text-xl font-bold text-black bg-gray-100/80 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full inline-block shadow-lg border-2 border-gray-400 medieval-text">
               {getCurrentInstructions()}
             </p>
             {selectedTubes.length === 1 && (
-              <p className="text-base text-black mt-3 medieval-text">
+              <p className="text-xs sm:text-sm md:text-base text-black mt-2 sm:mt-3 medieval-text">
                 Select one more glowing element to complete the mix!
               </p>
             )}
