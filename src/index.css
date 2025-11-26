@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  :root {
+    --card-max-width: 1200px;   /* adjust as needed */
+    --side-safe-gap: 120px;     /* keeps side artwork visible */
+    --card-radius: 20px;
+    --card-vertical-gap: 28px;  /* top & bottom spacing from viewport edges */
+  }
+
+  .site-card-wrapper {
+    position: relative;
+  }
+
+  .site-card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: var(--card-vertical-gap);
+    bottom: var(--card-vertical-gap);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(var(--card-max-width), calc(100% - (var(--side-safe-gap) * 2)));
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.06);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .site-card-wrapper > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Optional: if your side images use a class like .side-image and need to stay on top */
+  .side-image {
+    position: relative;
+    z-index: 2;
+  }
+}
