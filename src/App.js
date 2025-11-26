@@ -1,25 +1,44 @@
 import React, { useState } from "react";
-import { ArrowDown } from 'lucide-react';
-import "./CardBackground.css"; // import the CSS below
+import { ArrowDown } from "lucide-react";
+import "./CardBackground.css"; // or "./index.css" if you put the styles there
 
+// Single declaration that combines the wrapper + state.
+// Accepts children as either React nodes or a render-prop function to access state/handlers.
 export default function DesignAlchemyLab({ children }) {
-  return (
-    <div className="site-card-wrapper">
-      {/* Keep side images where they are in the DOM — this wrapper only provides the central white card behind content */}
-      {children}
-    </div>
-  );
-}
-
-export default function DesignAlchemyLab() {
+  // State (from your second snippet)
   const [currentFlask, setCurrentFlask] = useState(0);
   const [flasks, setFlasks] = useState([
-    { filled: false, colors: [], text: '', ingredients: [] },
-    { filled: false, colors: [], text: '', ingredients: [] },
-    { filled: false, colors: [], text: '', ingredients: [] }
+    { filled: false, colors: [], text: "", ingredients: [] },
+    { filled: false, colors: [], text: "", ingredients: [] },
+    { filled: false, colors: [], text: "", ingredients: [] },
   ]);
   const [selectedTubes, setSelectedTubes] = useState([]);
   const [pouring, setPouring] = useState([]);
+
+  // Bundle state & setters if you want to pass them down as a single object
+  const labState = {
+    currentFlask,
+    setCurrentFlask,
+    flasks,
+    setFlasks,
+    selectedTubes,
+    setSelectedTubes,
+    pouring,
+    setPouring,
+  };
+
+  return (
+    <div className="site-card-wrapper">
+      {/* Example of using ArrowDown icon somewhere if needed:
+          <div className="some-control"><ArrowDown /></div>
+      */}
+
+      {/* Render children. If children is a function (render-prop), call it with labState,
+          otherwise render the children normally. This keeps the API flexible. */}
+      {typeof children === "function" ? children(labState) : children}
+    </div>
+  );
+}
 
   const testTubes = [
     {
