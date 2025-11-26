@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 import { ArrowDown } from 'lucide-react';
 import "./CardBackground.css"; // import the CSS below
 
