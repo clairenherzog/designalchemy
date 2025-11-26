@@ -1,5 +1,15 @@
 import { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
+import "./CardBackground.css"; // import the CSS below
+
+export default function DesignAlchemyLab({ children }) {
+  return (
+    <div className="site-card-wrapper">
+      {/* Keep side images where they are in the DOM — this wrapper only provides the central white card behind content */}
+      {children}
+    </div>
+  );
+}
 
 export default function DesignAlchemyLab() {
   const [currentFlask, setCurrentFlask] = useState(0);
